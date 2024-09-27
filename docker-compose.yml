@@ -1,0 +1,133 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: bash -c "npm install && npm run dev"
+    depends_on:
+      - backend
+    tty: true
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - seeders-data:/app/seeders
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: concept
+      DB_HOST: db  # Explicitly define the host name
+      DB_PORT: 5432
+      NODE_ENV: development
+    depends_on:
+      - db
+    command: bash -c "npm install && bash ./init.sh"
+
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: concept
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres-data:
+  seeders-data:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# version: '3.8'
+
+# services:
+#   frontend:
+#     build:
+#       context: ./frontend
+#     ports:
+#       - "3000:3000"
+#     stdin_open: true
+#     environment:
+#       - CHOKIDAR_USEPOLLING=true
+#     volumes:
+#       - ./frontend:/app
+#       - /app/node_modules
+#     command: bash -c "npm install && npm run dev"
+#     depends_on:
+#       - backend
+#     tty: true
+
+#   backend:
+#     build:
+#       context: ./backend
+#     ports:
+#       - "5000:5000"
+#     volumes:
+#       - ./backend:/app
+#       - /app/node_modules
+#       - seeders-data:/app/seeders  # Add a volume to store the lock file
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: password
+#       POSTGRES_DB: concept
+#       DATABASE_URL: postgres://postgres:password@db:5432/concept
+#       NODE_ENV: development
+#     depends_on:
+#       - db
+#     command: bash -c "npm install && bash ./init.sh"  # Run the init.sh script to handle seeding
+
+#   db:
+#     image: postgres:latest
+#     ports:
+#       - "5432:5432"
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: password
+#       POSTGRES_DB: concept
+#     volumes:
+#       - postgres-data:/var/lib/postgresql/data
+#     healthcheck:
+#       test: ["CMD-SHELL", "pg_isready -U postgres"]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 5
+
+# volumes:
+#   postgres-data:
+#   seeders-data:  # Define a volume to persist seeder lock file

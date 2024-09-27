@@ -1,0 +1,20 @@
+
+
+/* Sidebar */
+
+.ant-menu-dark .ant-menu-item-selected {
+    background-color: #FFF !important;
+    color: #FF6B38 !important;
+
+}
+  
+.ant-menu-item-selected a {
+    color: #FF6B38 !important;
+}
+  
+.ant-menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.6) !important; /* Optional: Change hover color */
+    color: #FFF;
+}
+
+/* Sidebar End */
