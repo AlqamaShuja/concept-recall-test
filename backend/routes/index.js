@@ -1,4 +1,3 @@
-// routes/index.js
 const userRoutes = require('./userRoutes');
 const postRoutes = require('./postRoutes');
 const followerRoutes = require('./followerRoutes');

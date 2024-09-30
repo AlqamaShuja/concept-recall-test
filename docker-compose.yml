@@ -30,12 +30,12 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: concept
-      DB_HOST: db  # Explicitly define the host name
+      DB_HOST: db
       DB_PORT: 5432
       NODE_ENV: development
     depends_on:
       - db
-    command: bash -c "npm install && bash ./init.sh"
+    command: bash -c "npm install && npm run dev"  # Use `npm run dev` to start nodemon
 
   db:
     image: postgres:latest
@@ -56,6 +56,8 @@ services:
 volumes:
   postgres-data:
   seeders-data:
+
+
 
 
 
@@ -101,16 +103,17 @@ volumes:
 #     volumes:
 #       - ./backend:/app
 #       - /app/node_modules
-#       - seeders-data:/app/seeders  # Add a volume to store the lock file
+#       - seeders-data:/app/seeders
 #     environment:
 #       POSTGRES_USER: postgres
 #       POSTGRES_PASSWORD: password
 #       POSTGRES_DB: concept
-#       DATABASE_URL: postgres://postgres:password@db:5432/concept
+#       DB_HOST: db  # Explicitly define the host name
+#       DB_PORT: 5432
 #       NODE_ENV: development
 #     depends_on:
 #       - db
-#     command: bash -c "npm install && bash ./init.sh"  # Run the init.sh script to handle seeding
+#     command: bash -c "npm install && bash ./init.sh"
 
 #   db:
 #     image: postgres:latest
@@ -130,4 +133,4 @@ volumes:
 
 # volumes:
 #   postgres-data:
-#   seeders-data:  # Define a volume to persist seeder lock file
+#   seeders-data:

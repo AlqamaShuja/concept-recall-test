@@ -1,0 +1,70 @@
+.sl_icon_loader {
+    /* width: 100px; */
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.sl_icon_loader svg {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes fillAnimation {
+    0% {
+        fill-opacity: 0;
+        mask-position: left;
+        mask-size: 0% 100%;
+    }
+    20% {
+        fill-opacity: 1;
+        mask-position: left;
+        mask-size: 100% 100%;
+    }
+    50% {
+        fill-opacity: 1;
+        mask-position: right;
+        mask-size: 100% 100%;
+    }
+    80% {
+        fill-opacity: 1;
+        mask-position: right;
+        mask-size: 0% 100%;
+    }
+    100% {
+        fill-opacity: 0;
+        mask-position: left;
+        mask-size: 0% 100%;
+    }
+}
+
+svg .non-s {
+    fill-opacity: 0;
+    animation: fillAnimation 3s infinite linear;
+}
+
+svg .two-yellow-dot {
+    animation-delay: 0s;
+}
+
+svg .three-green-dot {
+    animation-delay: 0.3s;
+}
+
+svg .four-light-green-dot {
+    animation-delay: 0.6s;
+}
+
+svg .five-light-blue-dot {
+    animation-delay: 0.9s;
+}
+
+svg .six-dark-blue-dot {
+    animation-delay: 1.2s;
+}
+
+svg .seven-purple-dot {
+    animation-delay: 1.5s;
+}

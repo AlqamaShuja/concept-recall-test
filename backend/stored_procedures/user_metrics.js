@@ -1,7 +1,5 @@
 const { Sequelize } = require('sequelize');
-const config = require('../db/config');
-
-const sequelize = new Sequelize(config.development);
+const { sequelize } = require('../models');
 
 const createUserMetricsStoredProcedure = async () => {
   const procedureExistsQuery = `

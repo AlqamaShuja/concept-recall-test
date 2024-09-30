@@ -30,7 +30,7 @@ const Header = ({ collapsed, toggleSidebar }) => {
       <Menu.Item
         key="profile"
         icon={<SettingOutlined style={{ fontSize: '16px' }} />}
-        onClick={() => navigate('/profile')} // Navigate to /profile
+        // onClick={() => navigate('/profile')} // Navigate to /profile
       >
         Profile
       </Menu.Item>

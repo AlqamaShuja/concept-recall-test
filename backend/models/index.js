@@ -1,9 +1,6 @@
 const { Sequelize } = require('sequelize');
 const config = require('../db/config');
 
-// console.log("Development: ", config.development);
-
-// Initialize Sequelize
 const sequelize = new Sequelize(
     config.development.database,
     config.development.username,
@@ -28,5 +25,5 @@ Post.belongsTo(User, { foreignKey: 'userId' });
 User.belongsToMany(User, { as: 'Followers', through: Follower, foreignKey: 'followingId' });
 User.belongsToMany(User, { as: 'Followings', through: Follower, foreignKey: 'followerId' });
 
-// Export models and sequelize instance
+
 module.exports = { sequelize, User, Post, Follower };

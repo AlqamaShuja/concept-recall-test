@@ -1,9 +1,7 @@
-// layouts/MainLayout.js
 import React, { useState } from 'react';
 import { Layout } from 'antd';
-import Header from '../Header/Header'; // Import the header
-import Sidebar from '../Sidebar/Sidebar'; // Import the sidebar
-// import Sidebar from '../../Components/'
+import Header from '../Header/Header'; 
+import Sidebar from '../SideBar/SideBar';
 
 const { Content } = Layout;
 

@@ -1,4 +1,3 @@
-# Development Dockerfile
 FROM node:18
 
 WORKDIR /app
@@ -10,7 +9,7 @@ COPY . .
 
 EXPOSE 5000
 
-CMD ["npm", "run", "dev"] 
+CMD ["npm", "run", "dev"]
 
 
 

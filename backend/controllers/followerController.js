@@ -1,28 +1,25 @@
-// controllers/followerController.js
-const { User } = require('../models');
+const { Sequelize } = require('sequelize');
+const { User, sequelize } = require('../models');
 
-// Get User's Followers
-exports.getUserFollowers = async (req, res) => {
-  try {
-    const user = await User.findByPk(req.params.id, {
-      include: [{ model: User, as: 'Followers' }]
-    });
-    if (!user) return res.status(404).send("User not found");
-    res.json(user.Followers);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch followers' });
-  }
-};
+exports.getUserFollowData = async (req, res) => {
+  const userId = req.params.id;
 
-// Get User's Followings
-exports.getUserFollowings = async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.id, {
-      include: [{ model: User, as: 'Following' }]
-    });
-    if (!user) return res.status(404).send("User not found");
-    res.json(user.Following);
+    const result = await sequelize.query(
+      `SELECT * FROM get_user_follow_data(:userId)`,
+      {
+        type: Sequelize.QueryTypes.SELECT,
+        replacements: { userId: parseInt(userId) },
+      }
+    );
+
+    if (result.length > 0) {
+      res.json(result[0]);
+    } else {
+      res.status(404).json({ message: "User not found or no followers/followings data." });
+    }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch followings' });
+    console.error('Error fetching user follow data:', error);
+    res.status(500).json({ error: 'Failed to fetch user follow data' });
   }
 };
